@@ -33,67 +33,76 @@ function oldScrabbleScorer(word) {
 // don't change the names or your program won't work as expected. //
 
 function initialPrompt() {
-  initialWord = input.question("Let's play some scrabble! Enter a word: ");
-   console.log(oldScrabbleScorer(initialWord));
-   console.log(simpleScorer(initialWord));
-   console.log(vowelBonusScorer(initialWord));
+   startGameHere = input.question("Let's play some scrabble! Enter a word: ");
+   //console.log(oldScrabbleScorer(initialWord));
+   //console.log(simpleScorer(initialWord));
+  //console.log(vowelBonusScorer(initialWord));
+
 };
 
 let simpleScore = 0;
 
 function simpleScorer(word) {
   word = word.toUpperCase();
-  
-  for (let i = 0; i < word.length; i++) {
-    simpleScore++;
-  }
-  console.log(`Each letter is 1 point\npoints for ${word}: ${simpleScore}`);
-  return simpleScore;
-}
 
+	for (let i = 0; i < word.length; i++) {
+      simpleScore++;
+      }
+  console.log(`Each Letter is 1 Point\nPoints for ${word}: ${simpleScore}`);
+	return simpleScore;
+} 
 let vowelBonusScore = 0;
 
 function vowelBonusScorer(word) {
   word = word.toUpperCase();
-  let vowels = ["A", "E", "I", "0", "U"]
+  let vowels = ['A', 'E', 'I', 'O', 'U']
 
   for (let i = 0; i < word.length; i++) {
-    if (vowels.includes(word[i])) {
-      vowelBonusScore = vowelBonusScore + 3;
-    } else {
-      vowelBonusScore = vowelBonusScore + 1;
+      if (vowels.includes(word[i])) {
+        vowelBonusScore = vowelBonusScore + 3;
+      } else {
+        vowelBonusScore = vowelBonusScore + 1;
+      }
     }
-  }
-console.log(`Each Vowel is 3 points and each consonant is 1\npoints for ${word}: ${vowelBonusScore} `);
-return vowelBonusScore;
+  console.log(`Each Vowel is 3 Points and each Consonant is 1\nPoints for ${word}: ${vowelBonusScore}`);
+  
+  return vowelBonusScore;
 }
 
 let scrabbleScore = 0;
 
-const scoringAlgorithms = [{name: "Simple Score", description: "Each letter is worth 1 point.", scorerFunction: simpleScore
+const scoringAlgorithms = [{
+  name: "Simple Score",
+  description: "Each letter is worth 1 point",
+  scorerFunction: simpleScorer
 },
-{name: "Bonus Vowels",
-description: "Vowels are 3 pts, consonants are 1 pt.", scorerFunction: vowelBonusScore
+{
+name: "Bonus Vowels",
+description: "Vowels are 3 pts, consonants are 1 pt.",
+scorerFunction: vowelBonusScorer  
 },
-{name: "Scrable",
+{
+name: "Scrabble",
 description: "The traditional scoring algorithm.",
-scorerFunction: oldScrabbleScorer
+scorerFunction: oldScrabbleScorer  
 }];
 
-function scorerPrompt() {
-  scoreType = input.question("Please select scoring algorith would you like to use?\n\n0 - Simple: One point per character\n1 - Vowel Bonus: Vowels are worth 3 points\n2 - Scrabble: Uses scrabble point system\nEnter 0,1, or 2: ");
+function scorerPrompt(word) {
+  
+  scoreType = input.question("Which scoring algorithm would you like to use?\n\n0 - Simple: One point per character\n1 - Vowel Bonus: Vowels are worth 3 points\n2 - Scrabble: Uses scrabble point system\nLet score while testing with number #0, or number #1, or number#2: ");
 
-  if (scoreType == 0) {
-    console.log("Algorithm Name: ", scoringAlgorithms[0].name);
-    console.log("Result: ", scoringAlgorithms[0].scorerFunction(initialWord));
-    } else if (scoreType == 1) {
+  
+    if (scoreType == 0) {
       console.log("Algorithm Name: ", scoringAlgorithms[0].name);
-      console.log("Result: ", scoringAlgorithms[1].scorerFunction(initialWord));
+      console.log("Result: ", scoringAlgorithms[0].scorerFunction(startGameHere));
+    } else if (scoreType == 1) {
+      console.log("Algorithm Name: ", scoringAlgorithms[1].name);
+      console.log("Result: ", scoringAlgorithms[1].scorerFunction(startGameHere));
     } else if (scoreType == 2) {
       console.log("Algorithm Name: ", scoringAlgorithms[2].name);
-      console.log("Result: ", scoringAlgorithms[2].scorerFunction(initialWord));
-    }
-  
+      console.log("Result: ", scoringAlgorithms[2].scorerFunction(startGameHere));
+    } 
+
   return scrabbleScore;
 };
 
