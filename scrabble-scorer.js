@@ -111,9 +111,8 @@ function transform() {};
 let newPointStructure;
 
 function runProgram() {
-   initialPrompt();
-   scorerPrompt();
-   
+let word = initialPrompt();
+console.log(scorerPrompt(word));
 }
 
 // Don't write any code below this line //
