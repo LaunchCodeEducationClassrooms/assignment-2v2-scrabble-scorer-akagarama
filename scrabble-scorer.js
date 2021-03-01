@@ -3,13 +3,13 @@
 const input = require("readline-sync");
 
 const oldPointStructure = {
-  1: ['a', 'e', 'i', 'o', 'u', 'l', 'n', 'r', 's', 't'],
-  2: ['d', 'g'],
-  3: ['b', 'c', 'm', 'p'],
-  4: ['f', 'h', 'v', 'w', 'y'],
-  5: ['k'],
-  8: ['j', 'x'],
-  10: ['q', 'z']
+  1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
+  2: ['D', 'G'],
+  3: ['B', 'C', 'M', 'P'],
+  4: ['F', 'H', 'V', 'W', 'Y'],
+  5: ['K'],
+  8: ['J', 'X'],
+  10: ['Q', 'Z']
 };
 
 function oldScrabbleScorer(word) {
@@ -39,7 +39,7 @@ function initialPrompt() {
 let simpleScore = 0;
 
 function simpleScorer(word) {
-  word = word.toLowerCase();
+  word = word.toUpperCase();
 
 	for (let i = 0; i < word.length; i++) {
       simpleScore++;
@@ -50,8 +50,8 @@ function simpleScorer(word) {
 let vowelBonusScore = 0;
 
 function vowelBonusScorer(word) {
-  word = word.toLowerCase();
-  let vowels = ['y', 'u', 'o', 'i', 'e', 'a']
+  word = word.toUpperCase();
+  let vowels = ["A", "E", "I", "O", "U"]
 
   for (let i = 0; i < word.length; i++) {
       if (vowels.includes(word[i])) {
@@ -65,12 +65,12 @@ function vowelBonusScorer(word) {
   return vowelBonusScore;  
 }
 
-function scrabbleScore(completetask) {
-completetask = completetask.toUpperCase();
+function scrabbleScore(finalpoint) {
+finalpoint = finalpoint.toLowerCase();
 let scrabblePoints = 0;
 
-for (i = 0; i < completetask.length; i++) {
-let letter = completetask[i];
+for (i = 0; i < finalpoint.length; i++) {
+let letter = finalpoint[i];
 scrabblePoints += newPointStructure[letter];
 }
 return scrabblePoints;
@@ -116,8 +116,8 @@ function transform() {};
 let newPointStructure;
 
 function runProgram() {
-let word = initialPrompt();
-console.log(scorerPrompt(word));
+initialPrompt();
+scorerPrompt();
 }
 
 // Don't write any code below this line //
