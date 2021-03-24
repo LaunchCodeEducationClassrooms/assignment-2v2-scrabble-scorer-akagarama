@@ -70,7 +70,7 @@ word = word.toLowerCase();
 let scrabblePoints = 0;
 
 for (i = 0; i < word.length; i++) {
-//let letter = word[i];
+  let letter = word[i];
 scrabblePoints += newPointStructure[letter];
 }
 return scrabblePoints;
