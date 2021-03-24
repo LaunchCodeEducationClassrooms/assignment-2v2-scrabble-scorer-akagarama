@@ -65,16 +65,18 @@ function vowelBonusScorer(word) {
   return vowelBonusScore;  
 }
 
-function scrabbleScore(finalpoint) {
-finalpoint = finalpoint.toLowerCase();
+function scrabbleScore(word) {
+word = word.toLowerCase();
 let scrabblePoints = 0;
 
-for (i = 0; i < finalpoint.length; i++) {
-let letter = finalpoint[i];
+for (i = 0; i < word.length; i++) {
+//let letter = word[i];
 scrabblePoints += newPointStructure[letter];
 }
 return scrabblePoints;
-};
+}
+
+
 
 const scoringAlgorithms = [{
   name: "Simple Score",
@@ -99,25 +101,40 @@ function scorerPrompt(word) {
   
     if (scoreType == 0) {
       console.log("algorithm name: ", scoringAlgorithms[0].name);
-      console.log("scorerFunction result: ", scoringAlgorithms[0].scorerFunction(userToInputWord));
+      console.log("Result: ", scoringAlgorithms[0].scorerFunction(userToInputWord));
     } else if (scoreType == 1) {
-      console.log("algorithm name: ", scoringAlgorithms[1].name);
-      console.log("scorerFunction result: ", scoringAlgorithms[1].scorerFunction(userToInputWord));
+      console.log("algorithm Name: ", scoringAlgorithms[1].name);
+      console.log("Result: ", scoringAlgorithms[1].scorerFunction(userToInputWord));
     } else if (scoreType == 2) {
-      console.log("algorithm name: ", scoringAlgorithms[2].name);
-      console.log("scorerFunction result: ", scoringAlgorithms[2].scorerFunction(userToInputWord));
-    } 
-
+      console.log("Algorithm Name: ", scoringAlgorithms[2].name);
+      console.log("Result: ", scoringAlgorithms[2].scorerFunction(userToInputWord));
+    }
+    
   return scrabbleScore;
 };
 
-function transform() {};
+function transform(matr) {
+ let newPointObj = {};
+  for (key in matr) {
+ for (let i = 0; i < matr[key].length; i++) {
+   let letterItem = matr[key] [i];
+letterItem = letterItem.toLowerCase();
+newPointObj[`$(letterItem)`] = Number(key);
+}
+}
+return newPointObj; 
+};
 
-let newPointStructure;
+let newPointStructure = transform(oldPointStructure);
+newPointStructure[' '] = 0
+
+console.log("letter a: ", newPointStructure.a);
+console.log("letter j: ", newPointStructure.j);
+console.log("letter z: ", newPointStructure["z"]);
 
 function runProgram() {
-initialPrompt();
-scorerPrompt();
+let word = initialPrompt();
+console.log(scorerPrompt(word));
 }
 
 // Don't write any code below this line //
